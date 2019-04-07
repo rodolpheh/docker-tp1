@@ -2,6 +2,15 @@
 
 [![CircleCI](https://circleci.com/gh/rodolpheh/docker-tp1/tree/master.svg?style=shield)](https://circleci.com/gh/rodolpheh/docker-tp1/tree/master)
 
+- [TP1](#tp1)
+  - [Exercice 1](#exercice-1)
+  - [Exercice 2](#exercice-2)
+  - [Exercice 3](#exercice-3)
+  - [Exercice 4](#exercice-4)
+  - [Exercice 5](#exercice-5)
+  - [Exercice 6](#exercice-6)
+  - [Bonus](#bonus)
+
 ## Exercice 1
 
 Démarrer l'image de CentOS avec bash:
