@@ -1,5 +1,7 @@
 # TP1
 
+[![CircleCI](https://circleci.com/gh/rodolpheh/docker-tp1/tree/master.svg?style=shield)](https://circleci.com/gh/rodolpheh/docker-tp1/tree/master)
+
 ## Exercice 1
 
 Démarrer l'image de CentOS avec bash:
@@ -103,3 +105,5 @@ docker-compose up -d
 Pour la configuration de CircleCI pour build et push les images automatiquement, j'ai suivi [cet excellent article](https://circleci.com/blog/using-circleci-workflows-to-replicate-docker-hub-automated-builds/).
 
 L'image construite peut être visible [ici](https://cloud.docker.com/repository/docker/rodolpheh/centos).
+
+Le statut du build peut être visible [ici](https://circleci.com/gh/rodolpheh/docker-tp1/tree/master).
