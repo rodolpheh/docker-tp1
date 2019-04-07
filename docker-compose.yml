@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  my-nginx:
+    image: nginx:latest
+    ports: 
+      - 8000:80
+    volumes: 
+      - nginx-logs:/var/log/nginx:nocopy
+
+  log-tailer:
+    build: .
+    image: my-log-tailer:latest
+    volumes:
+      - nginx-logs:/var/log/nginx:nocopy
+    
+volumes:
+  nginx-logs: {}
