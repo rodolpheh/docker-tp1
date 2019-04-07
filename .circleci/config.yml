@@ -18,7 +18,7 @@ jobs:
           command: docker run --name centos -it centos:latest yum install -y wget nc
       - run:
           name: Commit changes in Docker image
-          command: docker commit centos $IMAGE_NAME:nc-wget
+          command: docker commit centos $IMAGE_NAME:latest
       - run:
           name: Archive Docker image
           command: docker save -o image.tar $IMAGE_NAME
