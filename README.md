@@ -97,3 +97,9 @@ Pour démarrer les containers :
 ```bash
 docker-compose up -d
 ```
+
+## Bonus
+
+Pour la configuration de CircleCI pour build et push les images automatiquement, j'ai suivi [cet excellent article](https://circleci.com/blog/using-circleci-workflows-to-replicate-docker-hub-automated-builds/).
+
+L'image construite peut être visible [ici](https://cloud.docker.com/repository/docker/rodolpheh/centos).
