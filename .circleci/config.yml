@@ -1,20 +1,58 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: rodolpheh/centos
     docker:
       - image: circleci/buildpack-deps:stretch
+
+jobs:
+  build:
+    executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker run --name centos -it centos:latest yum install -y wget nc
-      - run: docker commit centos rodolpheh/centos:nc-wget
+      - run:
+          name: Starting Docker image and installing packages
+          command: docker run --name centos -it centos:latest yum install -y wget nc
+      - run:
+          name: Commit changes in Docker image
+          command: docker commit centos $IMAGE_NAME:nc-wget
+      - run:
+          name: Archive Docker image
+          command: docker save -o image.tar $IMAGE_NAME
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
+
   publish-latest:
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    executor: docker-publisher
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - setup_remote_docker
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/image.tar
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push rodolpheh/centos:nc-wget
+            docker push $IMAGE_NAME:latest
+
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - publish-latest:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
