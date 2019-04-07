@@ -1,0 +1,8 @@
+version: 2
+jobs:
+  build:
+    steps:
+      - checkout
+      - setup_remote_docker
+      - docker run --name centos -it centos:latest yum install -y wget nc
+      - docker commit centos rodolpheh/centos:nc-wget
